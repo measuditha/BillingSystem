@@ -3,9 +3,7 @@ package com.mycompany.pacifickode;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author chath
@@ -13,19 +11,19 @@ import java.util.logging.Logger;
 public class DbConnection {
     
     public static Connection dbConnection(){
-        try {
+        
+        try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con=null;
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/pasific_kode","root","DSa0717614816");
-            return con;
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
+            String url = "jdbc:mysql://localhost:3306/pasific_kode?zeroDateTimeBehavior=CONVERT_TO_NULL";
+            String username = "root";
+            String password = "DSa0717614816";
+//            register the URL of DB
+            Connection conn = DriverManager.getConnection(url,username,password);
+            return conn;
+        
+        }catch(ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
         }
         return null;
-    
     }
 }
